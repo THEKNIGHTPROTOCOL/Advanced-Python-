@@ -1,36 +1,23 @@
-from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.label import Label
-from kivy.uix.textinput import TextInput
-from kivy.uix.button import Button
-import openai
+import random
 
-openai.api_key = "YOUR_OPENAI_API_KEY"
+responses = [
+    "Hey love! 😊 How’s your day going?",
+    "I was thinking about you! 💖",
+    "Tell me something exciting! 😍",
+    "You always make me smile! 😊",
+    "I love chatting with you! 💕",
+    "You’re the best! 🥰",
+    "I miss you already! ❤️",
+]
 
-class AIGirlfriendApp(App):
-    def build(self):
-        self.layout = BoxLayout(orientation='vertical')
-
-        self.label = Label(text="Talk to me!", font_size=20)
-        self.layout.add_widget(self.label)
-
-        self.text_input = TextInput(hint_text="Type your message here", multiline=False)
-        self.layout.add_widget(self.text_input)
-
-        self.button = Button(text="Send", on_press=self.get_response)
-        self.layout.add_widget(self.button)
-
-        return self.layout
-
-    def get_response(self, instance):
-        user_text = self.text_input.text
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": user_text}]
-        )
-        ai_text = response["choices"][0]["message"]["content"]
-        self.label.text = ai_text
-        self.text_input.text = ""
+def chatbot():
+    print("AI Girlfriend 🤖: Hello darling! Type 'bye' to exit.")
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == "bye":
+            print("AI Girlfriend 🤖: Bye bye, take care! 😘")
+            break
+        print("AI Girlfriend 🤖:", random.choice(responses))
 
 if __name__ == "__main__":
-    AIGirlfriendApp().run()
+    chatbot()
