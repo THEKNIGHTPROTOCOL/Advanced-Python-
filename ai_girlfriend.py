@@ -43,3 +43,18 @@ while True:
     response = chat_with_ai(user_input)
     print("AI Girlfriend:", response)
     speak(response)
+
+
+import firebase_admin
+from firebase_admin import credentials, firestore
+
+# Load Firebase credentials
+cred = credentials.Certificate("firebase-admin.json")
+firebase_admin.initialize_app(cred)
+db = firestore.client()
+
+# Save chat history
+def save_chat(user, bot):
+    doc_ref = db.collection("chat_history").document()
+    doc_ref.set({"user": user, "bot": bot})
+
