@@ -4,7 +4,7 @@ import pyttsx3
 engine = pyttsx3.init()
 recognizer = sr.Recognizer()
 
-def speak(text):
+def speak(text): 
     engine.say(text)
     engine.runAndWait()
 
